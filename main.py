@@ -11,38 +11,143 @@ SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlWULv-JbOHbHpiiOFnb39Hw_
 @app.get("/", response_class=HTMLResponse)
 def index():
     return """
-    <html>
-      <head>
-        <title>Edelweiss Yoga Center – Бүртгэл</title>
-      </head>
-      <body>
-        <h2>Edelweiss Yoga Center – Бүртгэл</h2>
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <form method="post" action="/register">
-          <p>Багш</p>
-          <input name="teacher" required>
+<title>Edelweiss Yoga Center – Бүртгэл</title>
 
-          <p>Өдөр</p>
-          <input name="schedule" required>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+        margin: 0;
+        padding: 0;
+    }
 
-          <p>Цаг</p>
-          <input name="time" required>
+    .container {
+        max-width: 420px;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
 
-          <p>Үйлчлүүлэгчийн нэр</p>
-          <input name="client" required>
+    h1 {
+        text-align: center;
+        color: #2e7d32;
+        margin-bottom: 24px;
+        font-size: 22px;
+    }
 
-          <p>Утас (8 оронтой)</p>
-          <input name="phone" required>
+    label {
+        display: block;
+        margin-top: 14px;
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+    }
 
-          <p>Төлбөр</p>
-          <input name="price" type="number" required>
+    select, input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
 
-          <br><br>
-          <button type="submit">Бүртгэх</button>
-        </form>
-      </body>
-    </html>
-    """
+    input:focus, select:focus {
+        outline: none;
+        border-color: #66bb6a;
+        box-shadow: 0 0 0 2px rgba(102,187,106,0.2);
+    }
+
+    button {
+        margin-top: 24px;
+        width: 100%;
+        padding: 14px;
+        background: #43a047;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    button:hover {
+        background: #388e3c;
+    }
+
+    .note {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 12px;
+        color: #777;
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Edelweiss Yoga Center – Бүртгэл</h1>
+
+    <form method="post" action="/register">
+
+        <label>Багш</label>
+        <select name="teacher" required>
+            <option value="">Сонгох</option>
+            <option>Өлзийжаргал</option>
+            <option>Өлзийдэлгэр</option>
+            <option>Өлзийбаяр</option>
+            <option>Тунгалаг</option>
+        </select>
+
+        <label>Өдөр</label>
+        <select name="schedule" required>
+            <option value="">Сонгох</option>
+            <option>Даваа, Лхагва, Баасан</option>
+            <option>Мягмар, Пүрэв, Бямба</option>
+        </select>
+
+        <label>Цаг</label>
+        <select name="time" required>
+            <option value="">Сонгох</option>
+            <option>6:00</option>
+            <option>7:00</option>
+            <option>9:00</option>
+            <option>12:00</option>
+            <option>17:30</option>
+            <option>18:00</option>
+            <option>19:00</option>
+        </select>
+
+        <label>Үйлчлүүлэгчийн нэр</label>
+        <input type="text" name="client" required placeholder="Нэрээ оруулна уу">
+
+        <label>Утас (8 оронтой)</label>
+        <input type="tel" name="phone" pattern="[0-9]{8}" required placeholder="99112233">
+
+        <label>Төлбөр (₮)</label>
+        <input type="number" name="price" required placeholder="Мөнгөн дүн">
+
+        <button type="submit">Бүртгэх</button>
+    </form>
+
+    <div class="note">
+        📱 Гар утсанд тохирсон загвар
+    </div>
+</div>
+</body>
+</html>
+"""
+
 
 
 @app.post("/register", response_class=HTMLResponse)
