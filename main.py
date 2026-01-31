@@ -153,10 +153,16 @@ def register(
         <a href="/">Буцах</a>
         </div>
         """
+if schedule == "mwf":
+    schedule_text = "Даваа, Лхагва, Баасан"
+elif schedule == "tts":
+    schedule_text = "Мягмар, Пүрэв, Бямба"
+else:
+    schedule_text = schedule
 
     payload = {
         "teacher": teacher,
-        "schedule": schedule,
+        "schedule": schedule_text,
         "time": time,
         "client": client,
         "phone": phone,
