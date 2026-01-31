@@ -101,8 +101,20 @@ def register(
 ):
     if not re.fullmatch(r"\d{8}", phone):
         return "<h3>❌ Утас буруу</h3><a href='/'>Буцах</a>"
-    wb = openpyxl.load_workbook(EXCEL_FILE)
-    ws = wb.active
-    ws.append([datetime.now().strftime("%Y-%m-%d %H:%M:%S"),teacher,schedule,time,client,phone,price])
-    wb.save(EXCEL_FILE)
+
+    payload = {
+        "teacher": teacher,
+        "schedule": schedule,
+        "time": time,
+        "client": client,
+        "phone": phone,
+        "price": price
+    }
+
+    try:
+        r = requests.post(SCRIPT_URL, json=payload, timeout=10)
+        print("Apps Script response:", r.text)
+    except Exception as e:
+        print("Apps Script error:", e)
+
     return "<h2>✅ Амжилттай бүртгэгдлээ</h2><a href='/'>Буцах</a>"
