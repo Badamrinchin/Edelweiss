@@ -3,6 +3,8 @@ from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
 import openpyxl, os, re
 from datetime import datetime
+SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlWULv-JbOHbHpiiOFnb39Hw_8uRZusR5-Rm1GapuCjRq_I1NSZ3eMfxCPlPXkA3ollQ/exec"
+
 
 app = FastAPI()
 EXCEL_FILE = "Бүртгэл.xlsx"
