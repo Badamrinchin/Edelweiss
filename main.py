@@ -102,15 +102,22 @@ button {
 
 <label>Цаг</label>
 <select name="time" required>
-<option value="">Сонгох</option>
-<option>6:00</option>
-<option>7:00</option>
-<option>9:00</option>
-<option>12:00</option>
-<option>17:30</option>
-<option>18:00</option>
-<option>19:00</option>
+    <option value="">Сонгох</option>
+
+    <!-- Даваа, Лхагва, Баасан -->
+    <option>6:00</option>
+    <option>7:00</option>
+    <option>9:00</option>
+    <option>12:00</option>
+    <option>18:00</option>
+    <option>19:00</option>
+
+    <!-- Мягмар, Пүрэв, Бямба -->
+    <option>8:00</option>
+    <option>9:30</option>
+    <option>17:30</option>
 </select>
+
 
 <label>Үйлчлүүлэгчийн нэр</label>
 <input type="text" name="client" required>
