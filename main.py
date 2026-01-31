@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
+# Google Apps Script Web App URL
 SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlWULv-JbOHbHpiiOFnb39Hw_8uRZusR5-Rm1GapuCjRq_I1NSZ3eMfxCPlPXkA3ollQ/exec"
 
 
@@ -63,8 +64,8 @@ button {
     border: none;
     border-radius: 14px;
 }
-button:hover {
-    background: #388e3c;
+button:disabled {
+    background: #9e9e9e;
 }
 </style>
 </head>
@@ -73,7 +74,8 @@ button:hover {
 <div class="container">
 <h1>Edelweiss Yoga Center – Бүртгэл</h1>
 
-<form method="post" action="/register">
+<!-- 🔒 onsubmit ашиглаж давхар даралтыг хаав -->
+<form method="post" action="/register" onsubmit="disableBtn()">
 
 <label>Багш</label>
 <select name="teacher" required>
@@ -105,11 +107,13 @@ button:hover {
 <label>Төлбөр (₮)</label>
 <input type="number" name="price" required>
 
-<button type="submit">Бүртгэх</button>
+<!-- 🔒 id өгч disable болгоно -->
+<button type="submit" id="submitBtn">Бүртгэх</button>
 </form>
 </div>
 
 <script>
+/* ⏰ Өдрөөс хамаарч цаг солигдох */
 const schedule = document.getElementById("schedule");
 const time = document.getElementById("time");
 
@@ -128,6 +132,13 @@ schedule.addEventListener("change", () => {
     time.appendChild(o);
   });
 });
+
+/* 🔒 Давхар даралтыг бүрэн хаана */
+function disableBtn() {
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.innerText = "Бүртгэж байна...";
+}
 </script>
 
 </body>
@@ -152,7 +163,7 @@ def register(
         </div>
         """
 
-    # ✅ ӨДРИЙГ ХҮН ОЙЛГОХ ТЕКСТ БОЛГОНО
+    # schedule кодыг хүн ойлгох текст болгоно
     if schedule == "mwf":
         schedule_text = "Даваа, Лхагва, Баасан"
     elif schedule == "tts":
